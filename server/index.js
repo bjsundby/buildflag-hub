@@ -5,12 +5,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 var targets = [
-  { name: "target1", link: "http://www.sundbysoft.com", timestamp: getTimestamp() },
-  { name: "target2", link: "https://www.nrk.no/", timestamp: getTimestamp() }
+  { name: "target1", link: "http://www.sundbysoft.com", timestamp: getTimeStamp() },
+  { name: "target2", link: "https://www.nrk.no/", timestamp: getTimeStamp() }
 ]
 
-function getTimestamp() {
-  return Math.round(+new Date()/1000);
+function getTimeStamp() {
+  return Math.round(+new Date() / 1000);
 }
 
 // Priority serve any static files.
@@ -31,10 +31,10 @@ app.get('/api/updateTarget', function (req, res) {
   })
   if (index >= 0) {
     targets[index].link = link
-    targets[index].timestamp = getTimestamp()
+    targets[index].timestamp = getTimeStamp()
   }
   else {
-    targets.push({ name: name, link: link, timestamp: getTimestamp()})
+    targets.push({ name: name, link: link, timestamp: getTimeStamp() })
   }
 
   notifyChangedTargets()
@@ -42,12 +42,23 @@ app.get('/api/updateTarget', function (req, res) {
 })
 
 // All remaining requests return the React app, so it can handle routing.
-app.get('*', function(request, response) {
+app.get('*', function (request, response) {
   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
 
+function processTargets() {
+  var limitTime = getTimeStamp() - 60 * 15;
+  targets = targets.filter((target) => {
+    return target.timestamp > limitTime
+  })
+  notifyChangedTargets()
+}
+
 const server = app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
+  setInterval(function () {
+    processTargets();
+  }, 10000);
 });
 
 /* --- Client push setup and functions ---------------------------------- */

@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .App {
   text-align: center;
 }
@@ -12,11 +16,22 @@
   height: 150px;
   padding: 20px;
   color: white;
+  font-size: 24px;
 }
 
 .Container {
   display: block;
   color: Black;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.Targets {
+  margin: auto;
+}
+
+.UpdateButton {
+  margin-top: 50px;
 }
 
 @keyframes App-logo-spin {

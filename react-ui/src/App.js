@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getTargets, updateTarget } from './Service';
 
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 let io = require('socket.io-client');
@@ -44,11 +44,8 @@ class App extends Component {
         </div>
         <div className="Container">
           <div className="Information">Devices </div>
-          <table>
+          <table className="Targets">
             <tbody>
-              <tr key="Header">
-                <th>Name</th>
-              </tr>
               {
                 this.state.targets.map(target => (
                   <tr key={target.name}>
@@ -59,7 +56,7 @@ class App extends Component {
             </tbody>
           </table>
         </div>
-        <button onClick={e => this.setTarget(e, { name: "target3", link: "link" })}>Update</button>
+        <button className="UpdateButton" onClick={e => this.setTarget(e, { name: "target3", link: "link" })}>Update Test</button>
       </div>
     );
   }
