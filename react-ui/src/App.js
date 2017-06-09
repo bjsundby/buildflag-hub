@@ -56,7 +56,6 @@ class App extends Component {
             </tbody>
           </table>
         </div>
-        <button className="UpdateButton" onClick={e => this.setTarget(e, { name: "target3", link: "link" })}>Update Test</button>
       </div>
     );
   }
