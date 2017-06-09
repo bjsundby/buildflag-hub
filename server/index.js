@@ -5,8 +5,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 var targets = [
-  { name: "target1", link: "http://www.sundbysoft.com", timestamp: getTimeStamp() },
-  { name: "target2", link: "https://www.nrk.no/", timestamp: getTimeStamp() }
 ]
 
 function getTimeStamp() {
