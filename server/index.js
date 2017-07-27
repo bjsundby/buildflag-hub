@@ -20,7 +20,7 @@ app.get('/api/getTargets', function (req, res) {
   });
 });
 
-app.get('/api/updateTarget', function (req, res) {
+app.post('/api/updateTarget', function (req, res) {
   var name = req.query.name
   var link = req.query.link
   var index = targets.findIndex((target) => {
